@@ -7,14 +7,14 @@ public class ColumnType extends DatabaseManager {
 
 	private String datatype;
 	private boolean notnull;
-	private CreateIndexType unique;
+	private IndexType unique;
 	private PrimaryKeyType primarykey;
 	private ForeignKeyType foreignkey;
 	private ExprType check; 
 	private String _default;
 	private boolean auto_increment;
 	
-	public ColumnType create_column(String datatype, boolean notnull, CreateIndexType unique,
+	public ColumnType create_column(String datatype, boolean notnull, IndexType unique,
 			PrimaryKeyType primarykey, ForeignKeyType foreignkey, ExprType check,
 			String _default, boolean auto_increment) {
 		
