@@ -1,0 +1,459 @@
+package amolang_AbstractedQuery.Query.DMLQuery;
+
+import amolang_AbstractedQuery.AbstractedQuery.AbstractedQuery;
+import amolang_AbstractedQuery.DBObject.DBObjectMysql;
+import amolang_AbstractedQuery.ExprType.ExprType;
+
+public class DMLQueryMysql extends DMLQuery {
+	
+	@Override
+	public DMLQuery select() {
+
+		sql += "SELECT ";
+		
+		return this;
+	}
+
+	@Override
+	public DMLQuery select(String column_identifier_or_function, String alias) {
+		
+		if(sql.endsWith(" ")) {
+			sql += "," +column_identifier_or_function +" AS " +alias +" ";
+		}
+		else {
+			sql += "SELECT " +column_identifier_or_function +" AS " +alias +" ";
+		}
+		
+		return this;
+	}
+
+	@Override
+	public DMLQuery select(String... column_identifier_or_functions) {
+
+		sql += "SELECT ";
+		for(String column_identifier_or_function : column_identifier_or_functions) {
+			sql += column_identifier_or_function +",";
+		}
+		
+		last_str_replace(sql, ",", " ");
+		
+		return this;
+	}
+
+	@Override
+	public DMLQuery select(ExprType expr_type_or_function, String alias) {
+
+		if(sql.endsWith(" ")) 	
+			sql += "," +operator_assembler.analysis(new DBObjectMysql(), expr_type_or_function) +" AS " +alias +" ";
+		
+		else 
+			sql += "SELECT " +operator_assembler.analysis(new DBObjectMysql(), expr_type_or_function) +" AS " +alias +" ";
+		
+		
+		return this;
+	}
+
+	@Override
+	public DMLQuery from(String table_identifier) {
+
+		if(sql.endsWith(";")) {
+			int pos = sql.lastIndexOf(";");
+			sql = sql.substring(0, pos) + ",";
+			
+			sql += table_identifier +";";
+		}
+		else {
+			sql += "FROM " +table_identifier +";";
+		}
+		
+		return this;
+	}
+
+	@Override
+	public DMLQuery from(AbstractedQuery select_query) {
+
+		if(sql.endsWith(";")) {
+			int pos = sql.lastIndexOf(";");
+			sql = sql.substring(0, pos) + ",";
+			
+			sql += "(" +select_query.getSql() +");";
+
+		}
+		else {
+			sql += "from (" +select_query.getSql() +");";
+		}	
+		
+		return this;
+	}
+
+	@Override
+	public DMLQuery from(String table_identifier, String alias) {
+
+		if(sql.endsWith(";")) {
+			int pos = sql.lastIndexOf(";");
+			sql = sql.substring(0, pos) + ",";
+			
+			sql += table_identifier +" AS " +alias +";";
+		}
+		else {
+			sql += "FROM " +table_identifier +" AS " +alias +";";
+		}	
+		
+		return this;
+	}
+
+	@Override
+	public DMLQuery from(AbstractedQuery select_query, String alias) {
+
+		if(sql.endsWith(";")) {
+			int pos = sql.lastIndexOf(";");
+			sql = sql.substring(0, pos) + ",";
+			
+			sql += "(" +select_query.getSql() +") AS " +alias +";";
+		}
+		else 
+			sql += "FROM (" +select_query.getSql() +") AS " +alias +";";
+		
+		return this;
+	}
+
+	@Override
+	public DMLQuery orderby(String asc_or_desc, String... column_identfiers) {
+
+		last_str_replace(sql, ";", " ");
+		
+		sql += " ORDER BY ";
+		for(String column_identfier : column_identfiers) {
+			sql += column_identfier +",";
+		}
+		
+		last_str_replace(sql, ",", " ");
+		sql += asc_or_desc +";";	
+			
+		
+		return this;
+	}
+
+	@Override
+	public DMLQuery orderby(String... column_identfiers) {
+
+		last_str_replace(sql, ";", " ");
+		
+		sql += " ORDER BY ";
+		for(String column_identfier : column_identfiers) {
+			sql += column_identfier +",";
+		}
+		
+		last_str_replace(sql, ",", ";");
+		
+		return this;
+	}
+
+	@Override
+	public DMLQuery limit(int constant_integer_type) {
+
+		last_str_replace(sql, ";", " ");
+		
+		sql += " LIMIT " +constant_integer_type +";";
+		
+		return this;
+	}
+
+	@Override
+	public DMLQuery inner_join(String table_identifier_first,
+			String column_identfier_first, String table_identifier_second,
+			String column_identfier_second) {
+
+		last_str_replace(sql, ";", " ");
+		
+		sql += table_identifier_first +" INNER JOIN " +table_identifier_second +" ON " +table_identifier_first +"."
+				+column_identfier_first +" = " +table_identifier_second +"." +column_identfier_second +";";
+		
+		return this;
+	}
+
+	@Override
+	public DMLQuery left_join(String table_identifier_first,
+			String column_identfier_first, String table_identifier_second,
+			String column_identfier_second) {
+
+		last_str_replace(sql, ";", " ");
+		
+		sql += table_identifier_first +" LEFT JOIN " +table_identifier_second +" ON " +table_identifier_first +"."
+				+column_identfier_first +" = " +table_identifier_second +"." +column_identfier_second +";";
+		
+		return this;
+	}
+
+	@Override
+	public DMLQuery right_join(String table_identifier_first,
+			String column_identfier_first, String table_identifier_second,
+			String column_identfier_second) {
+
+		last_str_replace(sql, ";", " ");
+		
+		sql += table_identifier_first +" RIGHT JOIN " +table_identifier_second +" ON " +table_identifier_first +"."
+				+column_identfier_first +" = " +table_identifier_second +"." +column_identfier_second +";";
+		
+		return this;
+	}
+
+	@Override
+	public DMLQuery full_join(String table_identifier_first,
+			String column_identfier_first, String table_identifier_second,
+			String column_identfier_second) {
+
+		last_str_replace(sql, ";", " ");
+		
+		sql += table_identifier_first +" FULL JOIN " +table_identifier_second +" ON " +table_identifier_first +"."
+				+column_identfier_first +" = " +table_identifier_second +"." +column_identfier_second +";";
+		
+		return this;
+	}
+
+	@Override
+	public DMLQuery union(AbstractedQuery select_query_first,
+			AbstractedQuery select_query_second) {
+
+		if(select_query_first.getSql().endsWith(";")) {
+			int pos = select_query_first.getSql().lastIndexOf(";");
+			sql += select_query_first.getSql().substring(0, pos) +" UNION " +select_query_second.getSql();
+		}
+		else 
+			sql +=select_query_first.getSql() +" UNION " +select_query_second.getSql();
+		
+		return this;
+	}
+
+	@Override
+	public DMLQuery union_all(AbstractedQuery select_query_first,
+			AbstractedQuery select_query_second) {
+
+		if(select_query_first.getSql().endsWith(";")) {
+			int pos = select_query_first.getSql().lastIndexOf(";");
+			sql += select_query_first.getSql().substring(0, pos) +" UNION ALL " +select_query_second.getSql();
+		}
+		else 
+			sql +=select_query_first.getSql() +" UNION ALL " +select_query_second.getSql();
+		
+		return this;
+	}
+
+	@Override
+	public DMLQuery into(String table_identifier) {
+		//Mysql은 지원 안됨
+		return this;
+	}
+
+	@Override
+	public DMLQuery group_by(String column_identfier) {
+
+		last_str_replace(sql, ";", " ");
+
+		sql += " GROUP BY " +column_identfier +";";
+		
+		return this;
+	}
+
+	@Override
+	public DMLQuery having(ExprType expr_type_or_function) {
+
+		last_str_replace(sql, ";", " ");
+
+		sql += " HAVING " +operator_assembler.analysis(new DBObjectMysql(), expr_type_or_function) +";";
+		
+		return this;
+	}
+
+	@Override
+	public DMLQuery having(String function) {
+
+		last_str_replace(sql, ";", " ");
+		
+		sql += " HAVING " +function +";";
+		
+		return this;
+	}
+
+	@Override
+	public DMLQuery update(String table_identifier) {
+
+		sql += "UPDATE " +table_identifier +" ";
+		
+		return this;
+	}
+
+	@Override
+	public DMLQuery update(AbstractedQuery select_query) {
+
+		sql += "UPDATE " +select_query.getSql();
+
+		return this;
+	}
+
+	@Override
+	public DMLQuery set(String column_identifier, String constant_type) {
+
+		if(sql.endsWith(";")) {
+			sql = sql.replace(';', ',');
+			sql += column_identifier +" = " +"'" +constant_type +"';";
+		}
+		else {
+			sql = sql.replace("INTO", "");
+			sql += " SET " +column_identifier +" = " +"'" +constant_type +"';";
+		}	
+		
+		return this;
+	}
+
+	@Override
+	public DMLQuery set(String... constant_types) {
+
+		sql += "VALUES (";
+		
+		for(String constant_type : constant_types) {
+			sql += "'" +constant_type +"',";
+		}
+		
+		last_str_replace(sql, ",", ");");
+		
+		return this;
+	}
+
+	@Override
+	public DMLQuery insert(String table_identifier) {
+
+		sql += "INSERT INTO " +table_identifier +" ";
+		
+		return this;
+	}
+
+	@Override
+	public DMLQuery set(AbstractedQuery select_query) {
+
+		sql += select_query.getSql();
+		
+		return this;
+	}
+
+	@Override
+	public DMLQuery set(AbstractedQuery select_query,
+			String... column_identifiers) {
+
+		sql += "(";
+		
+		for(String column_identifier : column_identifiers) {
+			sql += "'" +column_identifier +"',";
+			
+			if(!select_query.getSql().contains(column_identifier)) {
+				//TODO 예외처리
+			}
+		}
+		
+		int pos = sql.lastIndexOf(",");
+		sql = sql.substring(0, pos) + ") " +select_query.getSql();
+		
+		return this;
+	}
+
+	@Override
+	public DMLQuery delete() {
+
+		sql += "DELETE ";
+		
+		return this;
+	}
+
+	@Override
+	public DMLQuery where(ExprType expr_type) {
+
+		last_str_replace(sql, ";", " ");
+
+		sql += " WHERE " +operator_assembler.analysis(new DBObjectMysql(), expr_type) +";";
+		
+		return this;
+	}
+
+	@Override
+	public DMLQuery where(AbstractedQuery where_query) {
+
+		last_str_replace(sql, ";", " ");
+
+		sql += " WHERE " +where_query.getSql();
+		
+		return this;
+	}
+
+	@Override
+	public DMLQuery between(String identifier_type, String constant_type_first,
+			String constant_type_second) {
+
+		sql += identifier_type +" BETWEEN '" +constant_type_first +"' AND '" +constant_type_second +"';";
+		
+		return this;
+	}
+
+	@Override
+	public DMLQuery not_between(String identifier_type,
+			String constant_type_first, String constant_type_second) {
+
+		sql += identifier_type +" NOT BETWEEN '" +constant_type_first +"' AND '" +constant_type_second +"';";
+		
+		return this;
+	}
+
+	@Override
+	public DMLQuery in(String identifier_type, String... constant_types) {
+
+		sql += identifier_type +" IN (";
+		for(String constant_type : constant_types) {
+			sql += "'" +constant_type +"',";
+		}
+		
+		last_str_replace(sql, ",", ");");
+		
+		return this;
+	}
+
+	@Override
+	public DMLQuery in(String identifier_type, AbstractedQuery select_query) {
+
+		sql += identifier_type +" IN (" +select_query.getSql();
+	
+		last_str_replace(sql, ";", ");");
+		
+		return this;
+	}
+
+	@Override
+	public DMLQuery not_in(String identifier_type, String... constant_types) {
+		
+		sql += identifier_type +" NOT IN (";
+		for(String constant_type : constant_types) {
+			sql += "'" +constant_type +"',";
+		}
+		
+		last_str_replace(sql, ",", ");");
+		
+		return this;
+	}
+
+	@Override
+	public DMLQuery not_in(String identifier_type, AbstractedQuery select_query) {
+
+		sql += identifier_type +" NOT IN (" +select_query.getSql();
+		
+		last_str_replace(sql, ";", ");");
+		
+		return this;
+	}
+
+	@Override
+	public DMLQuery like(String identifier_type, String constant_type) {
+
+		sql += identifier_type +"LIKE '" +constant_type +"';";
+		
+		return this;
+	}
+
+}
