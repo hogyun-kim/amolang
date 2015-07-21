@@ -1,22 +1,25 @@
 package amolang_AbstractedQuery.test;
 
-import amolang_AbstractedQuery.DML.DMLQuery;
-import amolang_AbstractedQuery.DML.SelectStmtQuery;
-import amolang_AbstractedQuery.Database.DatabaseManager;
-import amolang_AbstractedQuery.ExpressionType.MultipleExprType;
-
-
+import amolang_AbstractedQuery.DBObject.DatabaseType;
 
 public class test {
 
+	public static Object set_get(String str) {
+		
+		Object data = str;
+		
+		return data;
+	}
 	
 	
 	public static void main(String[] args) {
 		
-		A test = new B();
+		String str = "hello";
 		
-		test.print();
+		Object o = str;
 		
+		System.out.println(o.getClass());
+
 	}
 
 }

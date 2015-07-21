@@ -1,11 +1,11 @@
 package amolang_AbstractedQuery.AbstractedQuery;
 
+import amolang_AbstractedQuery.ColumnType.ColumnType;
 import amolang_AbstractedQuery.DBObject.DBObject;
 import amolang_AbstractedQuery.DBObject.DBObjectMysql;
 import amolang_AbstractedQuery.DBObject.DBObjectOracle;
 import amolang_AbstractedQuery.DBObject.DatabaseType;
-import amolang_AbstractedQuery.ExpressionType.ExprType;
-import amolang_AbstractedQuery.Query.DDLQuery.ColumnType;
+import amolang_AbstractedQuery.ExprType.ExprType;
 
 public class AbstractedQuery {
 
@@ -25,12 +25,12 @@ public class AbstractedQuery {
 	public DBObject getDBObject(DatabaseType database_type) {
 		
 		switch(database_type) {
-		case DATABASE_TYPE_ORACLE:
-			return new DBObjectOracle();
-		case DATABASE_TYPE_MYSQL:
-			return new DBObjectMysql();
-		default:
-			return null;
+			case DATABASE_TYPE_ORACLE:
+				return new DBObjectOracle();
+			case DATABASE_TYPE_MYSQL:
+				return new DBObjectMysql();
+			default:
+				return null;
 		}
 	}
 	
@@ -44,7 +44,7 @@ public class AbstractedQuery {
 	//TODO excuteQuery()
 	//TODO close()
 	
-	public String getsql() {
+	public String getSql() {
 		
 		return this.dbobject.getSql();
 	}
@@ -56,15 +56,9 @@ public class AbstractedQuery {
 		
 		return this;
 	}
-	public AbstractedQuery create_table(String table_identifier) {
+	public AbstractedQuery create_table(String table_identifier, ColumnType... column_types) {
 		
 		this.dbobject.create_table(table_identifier);
-		
-		return this;
-	}
-	public AbstractedQuery create_column(ColumnType column_type) {
-		
-		this.dbobject.create_column(column_type);
 		
 		return this;
 	}
@@ -80,27 +74,22 @@ public class AbstractedQuery {
 		
 		return this;
 	}
-	public AbstractedQuery drop_index(String index_identifier, String table_identifier) {
-		
-		this.dbobject.drop_index(index_identifier, table_identifier);
-		
-		return this;
-	}
 	public AbstractedQuery drop_view(String view_identifier) {
 		
 		this.dbobject.drop_view(view_identifier);
 		
 		return this;
 	}
+	//여기서부터 alter_table 하위 메소드
 	public AbstractedQuery alter_table(String table_identifier) {
 		
 		this.dbobject.alter_table(table_identifier);
 		
 		return this;
 	}
-	public AbstractedQuery add_column(String column_identifier, ColumnType column_type) {
+	public AbstractedQuery add_column(ColumnType column_type) {
 		
-		this.dbobject.add_column(column_identifier, column_type);
+		this.dbobject.add_column(column_type);
 		
 		return this;
 	}
@@ -149,6 +138,20 @@ public class AbstractedQuery {
 	public AbstractedQuery change_column(String column_identifier, ColumnType column_type) {
 		
 		this.dbobject.change_column(column_identifier, column_type);
+		
+		return this;
+	}
+	
+	public AbstractedQuery add_auto_increment(ColumnType column_type) {
+		
+		this.dbobject.add_auto_increment(column_type);
+		
+		return this;
+	}
+	
+	public AbstractedQuery handshake_auto_increment(int constant_integer_type) {
+		
+		this.dbobject.handshake_auto_increment(constant_integer_type);
 		
 		return this;
 	}

@@ -1,11 +1,19 @@
 package amolang_AbstractedQuery.test;
 
-public class B extends A {
+public class B implements A {
+
+	String test;
+	
+	@Override
+	public void test() {
+		test = "hello world!!!";
+	}
 
 	@Override
-	public String getStr() {
-		return new String("hello world!");
+	public String getTest() {
+		return test;
 	}
+
 	
 	
 }
