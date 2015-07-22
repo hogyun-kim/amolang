@@ -1,5 +1,7 @@
 package amolang_AbstractedQuery.DBObject;
 
+import java.sql.Connection;
+
 import amolang_AbstractedQuery.AbstractedQuery.AbstractedQuery;
 import amolang_AbstractedQuery.ColumnType.ColumnType;
 import amolang_AbstractedQuery.ExprType.ExprType;
@@ -16,7 +18,7 @@ public abstract class DBObject {
 	}
 	
 	public abstract Query getQuery();
-	public abstract void connect(String ip, int port, String instance, String user_id, String password);
+	public abstract Connection connect(String url, int port, String instance, String user_id, String password);
 	//TODO excuteQuery()
 	//TODO close()
 	public abstract String getOperator(String abstracted_operator);

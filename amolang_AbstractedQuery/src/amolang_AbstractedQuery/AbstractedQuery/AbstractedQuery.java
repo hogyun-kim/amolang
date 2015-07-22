@@ -1,5 +1,7 @@
 package amolang_AbstractedQuery.AbstractedQuery;
 
+import java.sql.Connection;
+
 import amolang_AbstractedQuery.ColumnType.ColumnType;
 import amolang_AbstractedQuery.DBObject.DBObject;
 import amolang_AbstractedQuery.DBObject.DBObjectMysql;
@@ -10,16 +12,16 @@ import amolang_AbstractedQuery.ExprType.ExprType;
 public class AbstractedQuery {
 
 	private DBObject dbobject;
+	private Connection connection;
 	
 	public AbstractedQuery(DatabaseType database_type) {
 		
 		this.dbobject = getDBObject(database_type);	
 	}
 	
-	public AbstractedQuery(DatabaseType database_type, String ip, int port,
-			String instance, String user_id, String password) {
+	public AbstractedQuery(DatabaseType database_type, String url, int port, String instance, String user_id, String password) {
 		
-		connect(database_type, ip, port, instance, user_id, password);
+		connect(database_type, url, port, instance, user_id, password);
 	}
 	
 	public DBObject getDBObject(DatabaseType database_type) {
@@ -34,11 +36,15 @@ public class AbstractedQuery {
 		}
 	}
 	
-	public void connect(DatabaseType database_type, String ip, int port,
-			String instance, String user_id, String password) {
+	public void connect(DatabaseType database_type, String url, int port, String instance, String user_id, String password) {
 		
-		this.dbobject = getDBObject(database_type);
-		this.dbobject.connect(ip, port, instance, user_id, password);
+		dbobject = getDBObject(database_type);
+		connection = dbobject.connect(url, port, instance, user_id, password);
+	}
+	
+	public Connection getConnection() {
+		
+		return connection;
 	}
 	
 	//TODO excuteQuery()

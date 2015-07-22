@@ -1,5 +1,7 @@
 package amolang_AbstractedQuery.DBObject;
 
+import java.sql.Connection;
+
 import amolang_AbstractedQuery.Query.Query;
 
 public class DBObjectOracle extends DBObject {
@@ -11,10 +13,10 @@ public class DBObjectOracle extends DBObject {
 	}
 
 	@Override
-	public void connect(String ip, int port, String instance, String user_id,
+	public Connection connect(String ip, int port, String instance, String user_id,
 			String password) {
 		// TODO Auto-generated method stub
-		
+		return null;
 	}
 
 	@Override

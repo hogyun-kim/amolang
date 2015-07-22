@@ -1,8 +1,14 @@
 package amolang_AbstractedQuery.DBObject;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
 import amolang_AbstractedQuery.Query.Query;
 
 public class DBObjectMysql extends DBObject {
+	
+	private static final String driverName = "com.mysql.jdbc.Driver";
 	
 	public enum Operator {
 		EQUAL("="), NOT_EQUAL("!="), 
@@ -27,10 +33,21 @@ public class DBObjectMysql extends DBObject {
 	}
 
 	@Override
-	public void connect(String ip, int port, String instance, String user_id,
-			String password) {
-		// TODO Auto-generated method stub
+	public Connection connect(String ip, int port, String instance, String user_id, String password) {
 		
+		Connection connection = null;
+		String url = "jdbc:mysql://" +ip +":" +String.valueOf(port) +"/" +instance;
+		try {
+
+			Class.forName(driverName);
+			connection = DriverManager.getConnection(url, user_id, password);
+			
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return connection;
 	}
 
 	@Override
