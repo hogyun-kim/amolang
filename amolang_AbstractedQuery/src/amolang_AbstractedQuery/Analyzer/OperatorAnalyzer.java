@@ -26,7 +26,7 @@ public class OperatorAnalyzer implements Tree<Object> {
 		}
 		
 		if(root.getLeft_node() != null) 
-			expression += "(" +Traversal(dbobject, expression, root.getLeft_node()) +" ";
+			expression += "(" +Traversal(dbobject, root.getLeft_node()) +" ";
 		
 		if(root.getData().getClass() == AbstractedOperator.class) 
 			expression += dbobject.getOperator(((AbstractedOperator) root.getData()).name());
@@ -34,13 +34,15 @@ public class OperatorAnalyzer implements Tree<Object> {
 			expression += root.getData().toString();
 		
 		if(root.getRight_node() != null)
-			expression += " " +Traversal(dbobject, expression, root.getRight_node()) +")";
+			expression += " " +Traversal(dbobject, root.getRight_node()) +")";
 
 		return expression;
 	}
 	
-	public String Traversal(DBObject dbobject, String expression, Node<Object> node) {
+	public String Traversal(DBObject dbobject, Node<Object> node) {
 			
+		String expression = "";
+		
 		if(node == null) {
 			
 			expression += "";
@@ -48,16 +50,16 @@ public class OperatorAnalyzer implements Tree<Object> {
 			return expression;
 		}
 		
-		if(root.getLeft_node() != null) 
-			expression += "(" +Traversal(dbobject, expression, node.getLeft_node()) +" ";
+		if(node.getLeft_node() != null) 
+			expression += "(" +Traversal(dbobject, node.getLeft_node()) +" ";
 		
 		if(node.getData().getClass() == AbstractedOperator.class) 
 			expression += dbobject.getOperator(((AbstractedOperator) node.getData()).name());
 		else
 			expression += node.getData().toString();
 		
-		if(root.getRight_node() != null)
-			expression += " " +Traversal(dbobject, expression, node.getRight_node()) +")";
+		if(node.getRight_node() != null)
+			expression += " " +Traversal(dbobject, node.getRight_node()) +")";
 		
 		return expression;
 	}

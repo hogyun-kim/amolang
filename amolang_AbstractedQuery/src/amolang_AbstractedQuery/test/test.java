@@ -4,6 +4,8 @@ import java.sql.SQLException;
 
 import amolang_AbstractedQuery.AbstractedQuery.AbstractedQuery;
 import amolang_AbstractedQuery.DBObject.DatabaseType;
+import amolang_AbstractedQuery.ExprType.ExprType;
+import amolang_AbstractedQuery.ExprType.MultipleExprType;
 	
 
 public class test {
@@ -11,12 +13,16 @@ public class test {
 	public static void main(String[] args) {
 		
 		AbstractedQuery aq = null;
+		ExprType et = new MultipleExprType();
+		ExprType et2 = new MultipleExprType();
 		
 		try {
 			aq = new AbstractedQuery(DatabaseType.DATABASE_TYPE_MYSQL, 
 					"localhost", 3306, "test", "root", "kcbl0212");
 			
-			aq.select("*").from("test");
+			//sql문에서 문자열이 필요한 경우에는 작은따옴표('')로 묶어줌
+			aq.select("*").from("test").where(et.equal("num", "1")
+					.and(et2.equal("name", "'cheol'")));
 			
 			System.out.println(aq.getSql());
 			
