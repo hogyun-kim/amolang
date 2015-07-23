@@ -3,13 +3,13 @@ package amolang_AbstractedQuery.DBQuery;
 import amolang_AbstractedQuery.AbstractedQuery.AbstractedQuery;
 import amolang_AbstractedQuery.ColumnType.ColumnType;
 import amolang_AbstractedQuery.DBObject.DatabaseType;
+import amolang_AbstractedQuery.DBQuery.DDLQuery.DDLQuery;
+import amolang_AbstractedQuery.DBQuery.DDLQuery.DDLQueryMysql;
+import amolang_AbstractedQuery.DBQuery.DDLQuery.DDLQueryOracle;
+import amolang_AbstractedQuery.DBQuery.DMLQuery.DMLQuery;
+import amolang_AbstractedQuery.DBQuery.DMLQuery.DMLQueryMysql;
+import amolang_AbstractedQuery.DBQuery.DMLQuery.DMLQueryOracle;
 import amolang_AbstractedQuery.ExprType.ExprType;
-import amolang_AbstractedQuery.Query.DDLQuery.DDLQuery;
-import amolang_AbstractedQuery.Query.DDLQuery.DDLQueryMysql;
-import amolang_AbstractedQuery.Query.DDLQuery.DDLQueryOracle;
-import amolang_AbstractedQuery.Query.DMLQuery.DMLQuery;
-import amolang_AbstractedQuery.Query.DMLQuery.DMLQueryMysql;
-import amolang_AbstractedQuery.Query.DMLQuery.DMLQueryOracle;
 
 public class DBQuery {
 
