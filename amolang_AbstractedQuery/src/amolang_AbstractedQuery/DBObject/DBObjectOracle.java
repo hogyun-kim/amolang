@@ -1,27 +1,110 @@
 package amolang_AbstractedQuery.DBObject;
 
-import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Timestamp;
 
-import amolang_AbstractedQuery.Query.Query;
+import amolang_AbstractedQuery.DBQuery.DBQuery;
 
 public class DBObjectOracle extends DBObject {
 
 	@Override
-	public Query getQuery() {
+	public DBQuery getQuery() {
 		
-		return new Query(DatabaseType.DATABASE_TYPE_ORACLE);
+		return new DBQuery(DatabaseType.DATABASE_TYPE_ORACLE);
 	}
 
 	@Override
-	public Connection connect(String ip, int port, String instance, String user_id,
+	public void connect(String ip, int port, String instance, String user_id,
 			String password) {
 		// TODO Auto-generated method stub
-		return null;
+		
 	}
 
 	@Override
 	public String getOperator(String abstracted_operator) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void excuteQuery() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void conn_close() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void pstmt_close() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean next() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public String getString(int columnIndex) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int getInt(int columnIndex) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public boolean getBoolean(int columnIndex) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public Timestamp getTimestamp(int columnIndex) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void excuteUpdate() throws SQLException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setSqlString(int something_index, String something)
+			throws SQLException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setSqlInt(int something_index, int something)
+			throws SQLException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setSqlBoolean(int something_index, boolean something)
+			throws SQLException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setSqlTimestamp(int something_index, Timestamp something)
+			throws SQLException {
+		// TODO Auto-generated method stub
+		
 	}
 }

@@ -1,26 +1,38 @@
 package amolang_AbstractedQuery.DBObject;
 
-import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Timestamp;
 
 import amolang_AbstractedQuery.AbstractedQuery.AbstractedQuery;
 import amolang_AbstractedQuery.ColumnType.ColumnType;
+import amolang_AbstractedQuery.DBQuery.DBQuery;
 import amolang_AbstractedQuery.ExprType.ExprType;
-import amolang_AbstractedQuery.Query.Query;
 
 
 
 public abstract class DBObject {
 
-	private Query query;
+	private DBQuery query;
 	
 	public DBObject() {
 		query = getQuery();
 	}
 	
-	public abstract Query getQuery();
-	public abstract Connection connect(String url, int port, String instance, String user_id, String password);
-	//TODO excuteQuery()
-	//TODO close()
+	public abstract DBQuery getQuery();
+	public abstract void connect(String url, int port, String instance, String user_id, String password) throws SQLException, ClassNotFoundException;
+	public abstract void excuteUpdate() throws SQLException;
+	public abstract void excuteQuery() throws SQLException;
+	public abstract void setSqlString(int something_index, String something) throws SQLException;
+	public abstract void setSqlInt(int something_index, int something) throws SQLException;
+	public abstract void setSqlBoolean(int something_index, boolean something) throws SQLException;
+	public abstract void setSqlTimestamp(int something_index, Timestamp something) throws SQLException;
+	public abstract void conn_close() throws SQLException;
+	public abstract void pstmt_close() throws SQLException;
+	public abstract boolean next() throws SQLException;
+	public abstract String getString(int columnIndex) throws SQLException;
+	public abstract int getInt(int columnIndex) throws SQLException;
+	public abstract boolean getBoolean(int columnIndex) throws SQLException;
+	public abstract Timestamp getTimestamp(int columnIndex) throws SQLException;
 	public abstract String getOperator(String abstracted_operator);
 	
 	public String getSql() {
