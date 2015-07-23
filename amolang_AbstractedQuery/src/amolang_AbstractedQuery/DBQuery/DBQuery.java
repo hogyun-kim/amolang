@@ -59,16 +59,12 @@ public class DBQuery {
 	}
 	
 	public String getDdl_sql() {
-		
-		dmlquery.handshake();
-		
+
 		return ddlquery.getSql();
 	}
 	
 	public String getDml_sql() {
-		
-		ddlquery.handshake();
-		
+
 		return dmlquery.getSql();
 	}
 	
@@ -81,6 +77,10 @@ public class DBQuery {
 			return dml_sql;
 		else if(!ddl_sql.equals("") && dml_sql.equals("")) 
 			return ddl_sql;
+		else if(!ddl_sql.equals("") && !dml_sql.equals("")) {
+			System.out.println("Error : Duplicate sql"); //TODO 예외처리 해야 함
+			return null;
+		}
 		else
 			return null;
 	}
