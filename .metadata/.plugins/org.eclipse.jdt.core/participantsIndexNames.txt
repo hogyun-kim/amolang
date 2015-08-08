@@ -1,0 +1,7 @@
+INDEX VERSION 1.127
+C:\Users\KC\Desktop\amolang\amolang\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\1039025651.index
+\amolang_WebGenerator\src\main\java
+C:\Users\KC\Desktop\amolang\amolang\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\1085887332.index
+\aamolang_WebGenerator\src\main\java
+C:\Users\KC\Desktop\amolang\amolang\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\1351388597.index
+\aamolang_WebGenerator\src\main\java

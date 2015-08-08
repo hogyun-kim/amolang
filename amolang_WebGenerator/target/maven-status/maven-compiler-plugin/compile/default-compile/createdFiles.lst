@@ -1,0 +1,14 @@
+net\amolang\core\dao\ComponentDao.class
+net\amolang\core\dao\DBinfoDao.class
+net\amolang\core\dao\admindb\AdminDBinfo.class
+net\amolang\core\service\GetComponentService.class
+net\amolang\core\service\GetDBinfoServiceImpl.class
+net\amolang\core\dao\searchcondition\SearchCondition.class
+net\amolang\core\model\DBinfo.class
+net\amolang\core\dao\DBinfoDaoImpl.class
+net\amolang\core\service\GetDBinfoService.class
+net\amolang\core\web\WebGeneratorController.class
+net\amolang\core\service\GetComponentServiceImpl.class
+net\amolang\components\web\TestController.class
+net\amolang\core\model\Component.class
+net\amolang\core\dao\ComponentDaoImpl.class

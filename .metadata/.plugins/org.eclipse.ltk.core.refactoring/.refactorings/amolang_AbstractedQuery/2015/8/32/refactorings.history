@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring accessors="true" comment="Delete 2 elements from project &apos;amolang_AbstractedQuery&apos;&#x0D;&#x0A;- Original project: &apos;amolang_AbstractedQuery&apos;&#x0D;&#x0A;- Original elements:&#x0D;&#x0A;     amolang_AbstractedQuery-1.1.3-jar-with-dependencies.jar&#x0D;&#x0A;     amolang_AbstractedQuery-1.1.3.jar" description="Delete elements" element1="target/amolang_AbstractedQuery-1.1.3-jar-with-dependencies.jar" element2="target/amolang_AbstractedQuery-1.1.3.jar" elements="0" flags="589830" id="org.eclipse.jdt.ui.delete" resources="2" stamp="1439010470343" subPackages="false" version="1.0"/>
+</session>

@@ -1,0 +1,33 @@
+package net.amolang.components.web;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+public class TestController {
+
+	@RequestMapping("/hello")
+	public String hello(@ModelAttribute("dbconnectinfo") Object dbinfo, Model model) {
+		
+		boolean success;
+		
+		if(dbinfo == null)
+			success = false;
+		else
+			success = true;
+		
+		model.addAttribute("success", success);
+		
+		return "hello";
+	}
+	
+	@RequestMapping("/test")
+	public String test(Model model) {
+		
+		model.addAttribute("test", "test?");
+		
+		return "test";
+	}
+}

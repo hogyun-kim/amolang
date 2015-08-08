@@ -10,4 +10,5 @@ public interface ResultSet {
 	public int getInt(int columnIndex) throws SQLException;
 	public boolean getBoolean(int columnIndex) throws SQLException;
 	public Timestamp getTimestamp(int columnIndex) throws SQLException;
+	public void resultset_close() throws SQLException;
 }

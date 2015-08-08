@@ -1,0 +1,56 @@
+package net.amolang.core.dao;
+
+import java.sql.SQLException;
+
+import amolang_AbstractedQuery.AbstractedQuery.AbstractedQuery;
+import net.amolang.core.dao.admindb.AdminDBinfo;
+import net.amolang.core.model.DBinfo;
+
+public class DBinfoDaoImpl implements DBinfoDao {
+	
+	DBinfo dbinfo;
+	
+	public void setDBinfo(DBinfo dbinfo) {
+		this.dbinfo = dbinfo;
+	}
+	
+	@Override
+	public DBinfo selectOne(){
+		
+		try {
+			
+			AbstractedQuery abstractedquery = new AbstractedQuery(AdminDBinfo.DBTYPE,
+					AdminDBinfo.IP, AdminDBinfo.PORT, AdminDBinfo.DBNAME, AdminDBinfo.USERNAME,
+					AdminDBinfo.PASSWORD);
+			
+			System.out.println("test");
+			
+			abstractedquery.select("*").from("dbinfo");
+			
+			abstractedquery.excuteQuery();
+			
+			while(abstractedquery.next()) {
+				dbinfo.setDbtype(abstractedquery.getString(1));
+				dbinfo.setIp(abstractedquery.getString(2));
+				dbinfo.setPort(abstractedquery.getInt(3));
+				dbinfo.setDbname(abstractedquery.getString(4));
+				dbinfo.setUsername(abstractedquery.getString(5));
+				dbinfo.setPassword(abstractedquery.getString(6));
+			}
+			
+			abstractedquery.close();
+	
+			
+		
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return dbinfo;
+	}
+
+}

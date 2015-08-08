@@ -18,14 +18,17 @@ public class test {
 		
 		try {
 			aq = new AbstractedQuery(DatabaseType.DATABASE_TYPE_MYSQL, 
-					"localhost", 3306, "test", "root", "kcbl0212");
+					"localhost", "3306", "test", "root", "kcbl0212");
 			
-			//sql¹®¿¡¼­ ¹®ÀÚ¿­ÀÌ ÇÊ¿äÇÑ °æ¿ì¿¡´Â ÀÛÀºµû¿ÈÇ¥('')·Î ¹­¾îÁÜ
-			aq.select("*").from("test").where(et.equal("num", "1")
-					.and(et2.equal("name", "'cheol'")));
+			//sqlï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ú¿ï¿½ï¿½ï¿½ ï¿½Ê¿ï¿½ï¿½ï¿½ ï¿½ï¿½ì¿¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç¥('')ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+			aq.select("*").from("component").from(new AbstractedQuery(DatabaseType.DATABASE_TYPE_MYSQL)
+			.select("id", "pid").from("component")
+			.where(new MultipleExprType().equal("name", "'" +"amolang" +"'")), "component_parent")
+			.where(new MultipleExprType().equal("name", "'" +"hello" +"'")
+			.and(new MultipleExprType().equal("component.parent_id", "component_parent.pid")));
 			
 			System.out.println(aq.getSql());
-			
+		/*	
 			aq.excuteQuery();
 			
 			while(aq.next()) {
@@ -35,7 +38,7 @@ public class test {
 				
 				System.out.println(num +", " +name);
 			}
-			
+			*/
 			aq.close();
 			
 			

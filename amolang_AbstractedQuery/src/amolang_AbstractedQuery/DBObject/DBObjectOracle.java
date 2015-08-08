@@ -14,7 +14,7 @@ public class DBObjectOracle extends DBObject {
 	}
 
 	@Override
-	public void connect(String ip, int port, String instance, String user_id,
+	public void connect(String ip, String port, String instance, String user_id,
 			String password) {
 		// TODO Auto-generated method stub
 		
@@ -104,6 +104,12 @@ public class DBObjectOracle extends DBObject {
 	@Override
 	public void setSqlTimestamp(int something_index, Timestamp something)
 			throws SQLException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void resultset_close() throws SQLException {
 		// TODO Auto-generated method stub
 		
 	}

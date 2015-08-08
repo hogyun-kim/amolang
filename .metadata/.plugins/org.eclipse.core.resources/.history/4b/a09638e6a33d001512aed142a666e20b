@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="Amolang_WebGenerator">
+        <wb-resource deploy-path="/" source-path="/target/m2e-wtp/web-resources"/>
+        <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/test/java"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/test/resources"/>
+        <dependent-module archiveName="amolang_AbstractedQuery-1.1.4.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/amolang_AbstractedQuery/amolang_AbstractedQuery">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <property name="java-output-path" value="/Amolang_WebGenerator/target/classes"/>
+        <property name="context-root" value="amolang-webgenerator"/>
+    </wb-module>
+</project-modules>

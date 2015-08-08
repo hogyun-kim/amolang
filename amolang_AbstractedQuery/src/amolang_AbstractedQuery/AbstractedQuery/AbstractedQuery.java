@@ -19,7 +19,7 @@ public class AbstractedQuery implements Connection, PreparedStatement, Query, Re
 		this.dbobject = getDBObject(database_type);	
 	}
 	
-	public AbstractedQuery(DatabaseType database_type, String url, int port, String instance, String user_id, String password) throws ClassNotFoundException, SQLException {
+	public AbstractedQuery(DatabaseType database_type, String url, String port, String instance, String user_id, String password) throws ClassNotFoundException, SQLException {
 		
 		connect(database_type, url, port, instance, user_id, password);
 	}
@@ -43,12 +43,13 @@ public class AbstractedQuery implements Connection, PreparedStatement, Query, Re
 	
 	public void close() throws SQLException {
 		
+		resultset_close();
 		pstmt_close();
 		conn_close();
 	}
-	
+
 	@Override
-	public void connect(DatabaseType database_type, String url, int port, String instance, String user_id, String password) throws ClassNotFoundException, SQLException {
+	public void connect(DatabaseType database_type, String url, String port, String instance, String user_id, String password) throws ClassNotFoundException, SQLException {
 		
 		dbobject = getDBObject(database_type);
 		dbobject.connect(url, port, instance, user_id, password);
@@ -143,7 +144,7 @@ public class AbstractedQuery implements Connection, PreparedStatement, Query, Re
 		return this;
 	}
 	
-	//¿©±â¼­ºÎÅÍ alter_table ÇÏÀ§ ¸Þ¼Òµå
+	//ï¿½ï¿½ï¿½â¼­ï¿½ï¿½ï¿½ï¿½ alter_table ï¿½ï¿½ï¿½ï¿½ ï¿½Þ¼Òµï¿½
 	@Override
 	public AbstractedQuery alter_table(String table_identifier) {
 		
@@ -447,7 +448,7 @@ public class AbstractedQuery implements Connection, PreparedStatement, Query, Re
 			return this;
 		}
 		
-		//InsertStmtQuery (UpdateStmtQueryÀÇ set ¸Þ¼Òµå 2°³ °°ÀÌ »ç¿ë)
+		//InsertStmtQuery (UpdateStmtQueryï¿½ï¿½ set ï¿½Þ¼Òµï¿½ 2ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½)
 		@Override
 		public AbstractedQuery insert(String table_identifier) {
 			
@@ -472,7 +473,7 @@ public class AbstractedQuery implements Connection, PreparedStatement, Query, Re
 			return this;
 		}
 		
-		//DeleteStmtQuery (fromÀº SelectStmtQuery ºÎºÐ °É °°ÀÌ »ç¿ë)
+		//DeleteStmtQuery (fromï¿½ï¿½ SelectStmtQuery ï¿½Îºï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½)
 		@Override
 		public AbstractedQuery delete() {
 			
@@ -582,5 +583,11 @@ public class AbstractedQuery implements Connection, PreparedStatement, Query, Re
 		public Timestamp getTimestamp(int columnIndex) throws SQLException {
 
 			return dbobject.getTimestamp(columnIndex);
+		}
+
+		@Override
+		public void resultset_close() throws SQLException {
+			
+			dbobject.resultset_close();
 		}	
 }

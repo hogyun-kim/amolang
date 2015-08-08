@@ -1,0 +1,86 @@
+package net.amolang.core.web;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.StringTokenizer;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import net.amolang.core.model.Component;
+import net.amolang.core.service.GetComponentService;
+import net.amolang.core.service.GetDBinfoService;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+@Controller
+public class WebGeneratorController {
+
+	private static final String COMPONENT_PATH = "redirect:/components/";
+	private GetComponentService getcomponentservice;
+	private GetDBinfoService getdbinfoservice;
+	
+	public void setGetComponentService(GetComponentService getcomponentservice) {
+		this.getcomponentservice = getcomponentservice;
+	}
+	
+	public void setGetDBinfoService(GetDBinfoService getdbinfoservice) {
+		this.getdbinfoservice = getdbinfoservice;
+	}
+
+	@RequestMapping("/**/?*")
+	public String getComponentInfo(HttpServletRequest request,
+			HttpSession session, Model model, final RedirectAttributes reAttributes) {
+		
+		String uri = request.getRequestURI();
+		String realuri = null;
+		Map<String, String[]> parammap = request.getParameterMap();
+		Component component = (Component) session.getAttribute(uri);
+		List<String> dbschema = new ArrayList<String>();
+		StringTokenizer token = null;
+		
+		String[] uri_token = uri.split("/");
+		realuri = uri_token[uri_token.length - 1];		
+		
+		if(component == null) {
+			component = getcomponentservice.getComponent(uri);
+		}
+		
+		if(component.dbNecessity()) {
+		
+			reAttributes.addFlashAttribute("dbconnectinfo", getdbinfoservice.getDbinfoFormList());
+			
+			dbschema.add(component.getArg_table());
+			
+			token = new StringTokenizer(component.getArg_columns(), ",");
+			
+			while(token.hasMoreTokens()) {
+				dbschema.add(token.nextToken());
+			}
+			
+			model.addAttribute("dbschema", dbschema);
+		}	
+		
+		if(!parammap.isEmpty()) {
+			
+			token = new StringTokenizer(component.getArg_params(), ",");
+			
+			Iterator<String> iterator = parammap.keySet().iterator();
+			
+			while(token.hasMoreTokens() && iterator.hasNext()) {
+				model.addAttribute(token.nextToken(), parammap.get(iterator.next()));
+			}
+			
+			if(token.countTokens() != 0 || iterator.hasNext() == true) {
+				//TODO exception처리
+			}
+		}
+				
+		return COMPONENT_PATH + realuri;
+	}
+}

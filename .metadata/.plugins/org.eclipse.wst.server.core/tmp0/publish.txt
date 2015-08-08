@@ -1,0 +1,4 @@
+#Tomcat publish data
+#Sun Aug 09 00:09:17 KST 2015
+org.eclipse.jst.j2ee.server\:amolang_AbstractedQuery=WEB-INF/lib/amolang_AbstractedQuery-1.1.5.jar
+org.eclipse.jst.jee.server\:/binary\:C\:\\Users\\KC\\.m2\\repository\\org\\springframework\\spring-web\\4.0.4.RELEASE\\spring-web-4.0.4.RELEASE.jar=WEB-INF/lib/spring-web-4.0.4.RELEASE.jar

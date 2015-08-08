@@ -41,7 +41,7 @@ public class DBObjectMysql extends DBObject {
 	}
 
 	@Override
-	public void connect(String ip, int port, String instance, String user_id, String password) throws SQLException, ClassNotFoundException {
+	public void connect(String ip, String port, String instance, String user_id, String password) throws SQLException, ClassNotFoundException {
 		
 		String url = "jdbc:mysql://" +ip +":" +String.valueOf(port) +"/" +instance;
 
@@ -137,5 +137,12 @@ public class DBObjectMysql extends DBObject {
 	public Timestamp getTimestamp(int columnIndex) throws SQLException {
 
 		return resultset.getTimestamp(columnIndex);
+	}
+
+	@Override
+	public void resultset_close() throws SQLException {
+
+		if(resultset != null)
+			resultset.close();
 	}
 }

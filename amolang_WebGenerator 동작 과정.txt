@@ -1,0 +1,11 @@
+Amolang_WebGenerator
+
+동작 과정
+
+1. 사용자 요청 (ex. amolang.net/board/list)
+
+2. WebGeneratorController 에서 요청을 받은 후 DB접속 정보 및 해당 컴포넌트가 요구하는 DB스키마 정보를 세션 및 DB에서 구함 또한, 요청 파라미터를 받아 컴포넌트에 전송할 데이터로 가공함
+
+3. 해당 컴포넌트에 WebGeneratorController에서 구한 데이터를 Model에 담아서 보냄과 동시에 재요청 (ex. amolang.net/components/board/list)
+
+4. 컴포넌트에서 요청 수행 후 사용자에게 응답을 보냄

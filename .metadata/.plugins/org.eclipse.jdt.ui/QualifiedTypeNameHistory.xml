@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="amolang_AbstractedQuery.AbstractedQuery.Connection"/>
+<fullyQualifiedTypeName name="java.sql.Connection"/>
+<fullyQualifiedTypeName name="java.sql.DriverManager"/>
+<fullyQualifiedTypeName name="java.sql.ResultSet"/>
+<fullyQualifiedTypeName name="java.sql.Statement"/>
+<fullyQualifiedTypeName name="org.springframework.web.bind.annotation.ModelAttribute"/>
+<fullyQualifiedTypeName name="org.springframework.web.servlet.ModelAndView"/>
+<fullyQualifiedTypeName name="org.springframework.ui.ModelMap"/>
+<fullyQualifiedTypeName name="org.springframework.web.servlet.View"/>
+<fullyQualifiedTypeName name="org.springframework.web.servlet.view.RedirectView"/>
+<fullyQualifiedTypeName name="org.springframework.web.servlet.mvc.support.RedirectAttributes"/>
+<fullyQualifiedTypeName name="java.util.Map"/>
+<fullyQualifiedTypeName name="net.amolang.core.model.DBinfo"/>
+<fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="amolang_AbstractedQuery.AbstractedQuery.AbstractedQuery"/>
+</qualifiedTypeNameHistroy>

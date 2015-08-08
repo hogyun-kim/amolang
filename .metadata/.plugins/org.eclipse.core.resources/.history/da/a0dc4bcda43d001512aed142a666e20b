@@ -1,0 +1,40 @@
+package net.amolang.components.web;
+
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+public class TestController {
+
+	@RequestMapping("/hello")
+	public String hello(Model model) {
+		
+		boolean d;
+		
+		
+		@SuppressWarnings("unchecked")
+
+		if(model.containsAttribute("dbconnectinfo"))
+			d=true;
+		else
+			d=false;
+		
+		model.addAttribute("success", d);
+		
+		return "hello";
+	}
+	
+	@RequestMapping("/test")
+	public String test(Model model) {
+		
+		Map<String, Object> dbinfo = model.asMap();
+		
+		model.addAttribute("test", dbinfo);
+		
+		return "test";
+	}
+}

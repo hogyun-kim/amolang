@@ -76,11 +76,14 @@ public class DMLQueryMysql extends DMLQuery {
 			int pos = sql.lastIndexOf(";");
 			sql = sql.substring(0, pos) + ",";
 			
-			sql += "(" +select_query.getSql() +");";
-
+			sql += "(" +select_query.getSql();
+			
+			last_str_replace(sql, ";", ");");
 		}
 		else {
-			sql += "from (" +select_query.getSql() +");";
+			sql += "FROM (" +select_query.getSql();
+			
+			last_str_replace(sql, ";", ");");
 		}	
 		
 		return this;
@@ -109,10 +112,17 @@ public class DMLQueryMysql extends DMLQuery {
 			int pos = sql.lastIndexOf(";");
 			sql = sql.substring(0, pos) + ",";
 			
-			sql += "(" +select_query.getSql() +") AS " +alias +";";
+			sql += "(" +select_query.getSql();
+			
+			last_str_replace(sql, ";", ")");
+			sql += " AS " +alias +";";
 		}
-		else 
-			sql += "FROM (" +select_query.getSql() +") AS " +alias +";";
+		else {
+			sql += "FROM (" +select_query.getSql();
+		
+			last_str_replace(sql, ";", ")");
+			sql += " AS " +alias +";";
+		}
 		
 		return this;
 	}
@@ -241,7 +251,7 @@ public class DMLQueryMysql extends DMLQuery {
 
 	@Override
 	public DMLQuery into(String table_identifier) {
-		//MysqlÀº Áö¿ø ¾ÈµÊ
+		//Mysqlï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Èµï¿½
 		return this;
 	}
 
@@ -346,7 +356,7 @@ public class DMLQueryMysql extends DMLQuery {
 			sql += "'" +column_identifier +"',";
 			
 			if(!select_query.getSql().contains(column_identifier)) {
-				//TODO ¿¹¿ÜÃ³¸®
+				//TODO ï¿½ï¿½ï¿½ï¿½Ã³ï¿½ï¿½
 			}
 		}
 		
